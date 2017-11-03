@@ -1,10 +1,6 @@
 #include "game.h"
 #include <time.h>
 
-/*
- inspired from https://github.com/mindcruzer/tic-tac-toe/blob/master/
-*/
-
 int uniform_distribution(int rangeLow, int rangeHigh);
 int randInRange(int min, int max);
 void write_server_int(int sockfd, int msg);
@@ -18,8 +14,14 @@ int main(int argc , char *argv[])
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
 
+    Move bestMove = findBestMove(board);
+    printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
+
+
     int firstRow = uniform_distribution(0,size-1);
     int firstCol = uniform_distribution(0,size-1);
+    player = 'X';
+    opponent = 'O';
 
     // sendBoard(board);
     printf("%d, %d\n", firstRow, firstCol);
