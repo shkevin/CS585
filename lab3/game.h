@@ -20,7 +20,7 @@ typedef struct Move
 	int row, col;
 } Move;
 
-char player, opponent;
+char player, opponent, empty;
 
 char** initializeBoard();
 
@@ -28,12 +28,12 @@ char** swapBoard(char* reply, char** out);
 
 char* sendBoard(char** board);
 
-int checkBoard(char** board, char player, char opponent);
+int checkBoard(char** board);
 
 int minimax(char** board, int depth, bool isMax);
 
 bool isMovesLeft(char** board);
 
-struct Move findBestMove(char** board);
+Move findBestMove(char** board);
 
 #endif

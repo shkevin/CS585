@@ -1,5 +1,7 @@
 #include "game.h"
 
+char empty = '-';
+
 char** initializeBoard()
 {
 	char **board = malloc(size * sizeof(char *));
@@ -12,7 +14,7 @@ char** initializeBoard()
 	{
 		for (int col = 0; col < size; ++col)
 		{
-			board[row][col] = '-';
+			board[row][col] = empty;
 		}
 	}
 	return board;
@@ -57,7 +59,7 @@ char* sendBoard(char** board)
 
 
 /* Checks the board to determine if there is a winner. */
-int checkBoard(char** board, char player, char opponent)
+int checkBoard(char** board)
 {
 	// Checking for Rows for X or O victory.
 	for (int row = 0; row<3; row++)
@@ -112,7 +114,7 @@ int checkBoard(char** board, char player, char opponent)
 // the value of the board
 int minimax(char** board, int depth, bool isMax)
 {
-	int score = checkBoard(board, player, opponent);
+	int score = checkBoard(board);
     // If Maximizer has won the game return his/her
     // evaluated score
 	if (score == 10)
@@ -139,7 +141,7 @@ int minimax(char** board, int depth, bool isMax)
 			for (int j = 0; j<3; j++)
 			{
                 // Check if cell is empty
-				if (board[i][j]=='_')
+				if (board[i][j]==empty)
 				{
                     // Make the move
 					board[i][j] = player;
@@ -150,7 +152,7 @@ int minimax(char** board, int depth, bool isMax)
 						minimax(board, depth+1, !isMax) );
 
                     // Undo the move
-					board[i][j] = '_';
+					board[i][j] = empty;
 				}
 			}
 		}
@@ -168,7 +170,7 @@ int minimax(char** board, int depth, bool isMax)
 			for (int j = 0; j<3; j++)
 			{
                 // Check if cell is empty
-				if (board[i][j]=='-')
+				if (board[i][j]== empty)
 				{
                     // Make the move
 					board[i][j] = opponent;
@@ -179,7 +181,7 @@ int minimax(char** board, int depth, bool isMax)
 						minimax(board, depth+1, !isMax));
 
                     // Undo the move
-					board[i][j] = '-';
+					board[i][j] = empty;
 				}
 			}
 		}
@@ -194,7 +196,7 @@ bool isMovesLeft(char** board)
 {
     for (int i = 0; i<3; i++)
         for (int j = 0; j<3; j++)
-            if (board[i][j]=='_')
+            if (board[i][j]== empty)
                 return true;
     return false;
 }
@@ -214,18 +216,18 @@ Move findBestMove(char** board)
     {
         for (int j = 0; j<3; j++)
         {
-            // Check if celll is empty
-            if (board[i][j]=='-')
+            // Check if cell is empty
+            if (board[i][j] == empty)
             {
                 // Make the move
                 board[i][j] = player;
  
                 // compute evaluation function for this
                 // move.
-                int moveVal = minimax(board, 0, false);
+                int moveVal = minimax(board, 0, true);
  
                 // Undo the move
-                board[i][j] = '-';
+                board[i][j] = empty;
  
                 // If the value of the current move is
                 // more than the best value, then update

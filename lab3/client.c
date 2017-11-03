@@ -9,25 +9,25 @@ int main(int argc , char *argv[])
 {
     int sock;
     struct sockaddr_in server;
+    Move bestMove;
     char* serverReply = malloc(size*size*sizeof(char));
     char* message = malloc(size*size*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
 
-    Move bestMove = findBestMove(board);
-    printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
-
-
-    int firstRow = uniform_distribution(0,size-1);
-    int firstCol = uniform_distribution(0,size-1);
     player = 'X';
     opponent = 'O';
 
-    // sendBoard(board);
-    printf("%d, %d\n", firstRow, firstCol);
-    message = sendBoard(board);
+    //bestMove = findBestMove(board);
+    // printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
 
-    printf("%s\n", message);
+    bestMove.row = uniform_distribution(0,size-1);
+    bestMove.col = uniform_distribution(0,size-1);
+    board[bestMove.row][bestMove.col] = player;
+    printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
+
+    bestMove = findBestMove(board);
+    printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
 
     //Create socket
     sock = socket(AF_INET , SOCK_STREAM , 0);

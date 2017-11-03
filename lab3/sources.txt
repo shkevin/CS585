@@ -5,3 +5,6 @@ http://www.geeksforgeeks.org/minimax-algorithm-in-game-theory-set-3-tic-tac-toe-
 inspired from https://github.com/mindcruzer/tic-tac-toe/blob/master/
 
 https://github.com/mindcruzer/tic-tac-toe/blob/master/server.c
+
+https://stackoverflow.com/questions/11641629/generating-a-
+uniform-distribution-of-integers-in-c
