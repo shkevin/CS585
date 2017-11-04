@@ -23,10 +23,23 @@ char** initializeBoard()
 char** swapBoard(char* reply, char** board)
 {
 	int col = 0;
-	for (int i = 0; i < size*size; ++i)
+	int row = 0;
+	for (int i = 0; i < maxChar; ++i)
 	{
-		board[i][col] = reply[i];
-		if(i % size == 0) col++;
+		if (row >= 3)
+		{
+			row = 0;
+		}
+		if (reply[i] == '|')
+		{
+			col++;
+		}
+		if (reply[i] == '\\')
+		{
+			break;
+		}
+		board[row][col] = reply[i];
+		row++;
 	}
 	return board;
 }
@@ -224,7 +237,7 @@ Move findBestMove(char** board)
  
                 // compute evaluation function for this
                 // move.
-                int moveVal = minimax(board, 2, true);
+                int moveVal = minimax(board, 0, false);
  
                 // Undo the move
                 board[i][j] = empty;
@@ -241,6 +254,14 @@ Move findBestMove(char** board)
             }
         }
     }
-    printf("%d, %d\n", );
+    // printf("%d, %d\n", bestMove.row, bestMove.col);
     return bestMove;
+}
+
+int uniform_distribution(int rangeLow, int rangeHigh) 
+{
+    double myRand = rand()/(1.0 + RAND_MAX); 
+    int range = rangeHigh - rangeLow + 1;
+    int myRand_scaled = (myRand * range) + rangeLow;
+    return myRand_scaled;
 }

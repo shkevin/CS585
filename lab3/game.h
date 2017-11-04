@@ -20,7 +20,7 @@ typedef struct Move
 	int row, col;
 } Move;
 
-char player, opponent, empty;
+char player, opponent;
 
 char** initializeBoard();
 
@@ -34,6 +34,8 @@ int minimax(char** board, int depth, bool isMax);
 
 bool isMovesLeft(char** board);
 
-Move findBestMove(char** board);
+struct Move findBestMove(char** board);
+
+int uniform_distribution(int rangeLow, int rangeHigh);
 
 #endif

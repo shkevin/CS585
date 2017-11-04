@@ -6,8 +6,7 @@ int main(int argc , char *argv[])
 {
     int socket_desc , client_sock , c , read_size;
     struct sockaddr_in server , client;
-    char client_message[maxChar];
-    char* message = malloc(maxChar*sizeof(char));
+    char* message = malloc(20*sizeof(char));
     char** board = initializeBoard();
     Move move;
     player = 'O';
@@ -52,25 +51,24 @@ int main(int argc , char *argv[])
     puts("Connection accepted");
 
     //Receive a message from client
-    while( (read_size = recv(client_sock , client_message , maxChar , 0)) > 0 )
+    while( (read_size = recv(client_sock , message , maxChar , 0)) > 0 )
     {
     	//process move reply here
 
         //Send the message back to client
-        board = swapBoard(client_message, board);
+        board = swapBoard(message, board);
         if (!isMovesLeft(board))
         {
         	/* tie */
-        	write(client_sock, "tie", strlen("tie"));
+        	// write(client_sock, "tie", strlen("tie"));
         }
         else
         {
         	move = findBestMove(board);
 	    	board[move.row][move.col] = player;
-	    	message = sendBoard(board);
         }
-
-        write(client_sock , message , strlen(client_message));
+        message = sendBoard(board);
+        write(client_sock , message , maxChar);
     }
 
     if(read_size == 0)

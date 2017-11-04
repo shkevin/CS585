@@ -11,8 +11,8 @@ int main(int argc , char *argv[])
     struct sockaddr_in server;
     Move bestMove;
     bool first = true;
-    char* serverReply = malloc(size*size*sizeof(char));
-    char* message = malloc(size*size*sizeof(char));
+    char* serverReply = malloc(maxChar*sizeof(char));
+    char* message = malloc(maxChar*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
 
@@ -46,35 +46,27 @@ int main(int argc , char *argv[])
     //keep communicating with server
     while(1)
     {
-        // printf("Enter message : ");
-        // scanf("%s" , message);
-
-        //process first move here
-
-        //Send some data
         if (!isMovesLeft(board))
         {
-            printf("Tie");
+            // printf("Tie");
             break;
         }
 
+
         if (first)
         {
-            printf("%s\n", "here");
             bestMove.row = uniform_distribution(0,size-1);
             bestMove.col = uniform_distribution(0,size-1);
-            printf("%s\n", "here");
             first = false;
         }
         else 
         {
-            
             bestMove = findBestMove(board);
-            board[bestMove.row][bestMove.col] = player;
-            printf("%s\n", "above");
-            message = sendBoard(board);
-            printf("%s\n", "below");
         }
+        board[bestMove.row][bestMove.col] = player;
+        message = sendBoard(board);
+
+        puts(message);
 
         if( send(sock, message, maxChar , 0) < 0)
         {
@@ -82,8 +74,6 @@ int main(int argc , char *argv[])
             puts("Send failed");
             return 1;
         }
-
-        puts(message);
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
@@ -102,14 +92,4 @@ int main(int argc , char *argv[])
     free(serverReply);
     return 0;
 }
-/*
-from https://stackoverflow.com/questions/11641629/generating-a-
-     uniform-distribution-of-integers-in-c
-*/
-int uniform_distribution(int rangeLow, int rangeHigh) 
-{
-    double myRand = rand()/(1.0 + RAND_MAX); 
-    int range = rangeHigh - rangeLow + 1;
-    int myRand_scaled = (myRand * range) + rangeLow;
-    return myRand_scaled;
-}
+
