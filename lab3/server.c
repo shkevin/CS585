@@ -7,7 +7,7 @@ int main(int argc , char *argv[])
     int socket_desc , client_sock , c , read_size;
     struct sockaddr_in server , client;
     char client_message[maxChar];
-    char** message = malloc(maxChar*sizeof(char));
+    char* message = malloc(maxChar*sizeof(char));
     char** board = initializeBoard();
     Move move;
     player = 'O';
@@ -63,8 +63,14 @@ int main(int argc , char *argv[])
         	/* tie */
         	write(client_sock, "tie", strlen("tie"));
         }
-        else move = findBestMove(board);
-        write(client_sock , client_message , strlen(client_message));
+        else
+        {
+        	move = findBestMove(board);
+	    	board[move.row][move.col] = player;
+	    	message = sendBoard(board);
+        }
+
+        write(client_sock , message , strlen(client_message));
     }
 
     if(read_size == 0)

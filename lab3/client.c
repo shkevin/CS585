@@ -10,6 +10,7 @@ int main(int argc , char *argv[])
     int sock;
     struct sockaddr_in server;
     Move bestMove;
+    bool first = true;
     char* serverReply = malloc(size*size*sizeof(char));
     char* message = malloc(size*size*sizeof(char));
     char** board = initializeBoard();
@@ -20,14 +21,6 @@ int main(int argc , char *argv[])
 
     //bestMove = findBestMove(board);
     // printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
-
-    bestMove.row = uniform_distribution(0,size-1);
-    bestMove.col = uniform_distribution(0,size-1);
-    board[bestMove.row][bestMove.col] = player;
-    printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
-
-    bestMove = findBestMove(board);
-    printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
 
     //Create socket
     sock = socket(AF_INET , SOCK_STREAM , 0);
@@ -59,13 +52,38 @@ int main(int argc , char *argv[])
         //process first move here
 
         //Send some data
-         
+        if (!isMovesLeft(board))
+        {
+            printf("Tie");
+            break;
+        }
+
+        if (first)
+        {
+            printf("%s\n", "here");
+            bestMove.row = uniform_distribution(0,size-1);
+            bestMove.col = uniform_distribution(0,size-1);
+            printf("%s\n", "here");
+            first = false;
+        }
+        else 
+        {
+            
+            bestMove = findBestMove(board);
+            board[bestMove.row][bestMove.col] = player;
+            printf("%s\n", "above");
+            message = sendBoard(board);
+            printf("%s\n", "below");
+        }
+
         if( send(sock, message, maxChar , 0) < 0)
         {
             //process first move here
             puts("Send failed");
             return 1;
         }
+
+        puts(message);
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
@@ -74,9 +92,8 @@ int main(int argc , char *argv[])
             break;
         }
 
-        // puts("Server reply :");
-        // puts(server_reply);
-        // processBoard(server_reply);
+        board = swapBoard(serverReply, board);
+        puts(serverReply);
     }
 
     close(sock);

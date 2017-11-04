@@ -224,7 +224,7 @@ Move findBestMove(char** board)
  
                 // compute evaluation function for this
                 // move.
-                int moveVal = minimax(board, 0, true);
+                int moveVal = minimax(board, 2, true);
  
                 // Undo the move
                 board[i][j] = empty;
@@ -241,5 +241,6 @@ Move findBestMove(char** board)
             }
         }
     }
+    printf("%d, %d\n", );
     return bestMove;
 }
