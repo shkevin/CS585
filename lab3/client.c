@@ -13,17 +13,12 @@ int main(int argc , char *argv[])
     bool first = true;
     char* serverReply = malloc(maxChar*sizeof(char));
     char* message = malloc(maxChar*sizeof(char));
-    char* messageTo = malloc(maxChar*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
-
-    message = sendBoard(board);
+    int gameCounter = 0;
 
     player = 'X';
     opponent = 'O';
-
-    //bestMove = findBestMove(board);
-    // printf("Row: %d, Col: %d\n", bestMove.row, bestMove.col);
 
     //Create socket
     sock = socket(AF_INET , SOCK_STREAM , 0);
@@ -35,7 +30,7 @@ int main(int argc , char *argv[])
 
     server.sin_addr.s_addr = inet_addr("127.0.0.1");
     server.sin_family = AF_INET;
-    server.sin_port = htons( 8888 );
+    server.sin_port = htons( port );
 
     //Connect to remote server
     if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
@@ -51,14 +46,20 @@ int main(int argc , char *argv[])
     {
         if (!isMovesLeft(board))
         {
-            // printf("Tie");
-            break;
+            board = setBoard(board);
+            first = true;
+            puts(message);
+            continue;
         }
 
         if (first)
         {
-            puts("Fresh board");
-            puts(message);
+            gameCounter++;
+            if (gameCounter > maxGames)
+            {
+                break;
+            }
+            // printf("Game # %d\n", gameCounter);
             bestMove.row = uniform_distribution(0,size-1);
             bestMove.col = uniform_distribution(0,size-1);
             board[bestMove.row][bestMove.col] = player;
@@ -79,15 +80,17 @@ int main(int argc , char *argv[])
             puts("Receive failed");
             break;
         }
-
-        puts(serverReply);
-        puts("swapping board from server");
+        if (serverReply == "tie")
+        {
+            board = setBoard(board);
+            first = true;
+            // puts(message);
+            continue;
+        }
         board = swapBoard(serverReply, board);
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
         message = sendBoard(board);
-        puts("after client move");
-        puts(message);
     }
 
     close(sock);
@@ -96,4 +99,3 @@ int main(int argc , char *argv[])
     free(serverReply);
     return 0;
 }
-

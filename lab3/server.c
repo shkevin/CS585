@@ -1,12 +1,10 @@
 #include "game.h"
 
-#define port 8888
-
 int main(int argc , char *argv[])
 {
     int socket_desc , client_sock , c , read_size;
     struct sockaddr_in server , client;
-    char* messageTo = malloc(20*sizeof(char));
+    char* message = malloc(20*sizeof(char));
     char* reply = malloc(20*sizeof(char));
     char** board = initializeBoard();
     Move move;
@@ -54,33 +52,32 @@ int main(int argc , char *argv[])
     //Receive a message from client
     while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
     {
-    	//process move reply here
-
         //Send the message back to client
         if (!isMovesLeft(board))
         {
-        	/* tie */
-        	// write(client_sock, "tie", strlen("tie"));
+        	board = setBoard(board);
+        	write(client_sock, "tie", strlen("tie"));
+        	continue;
         }
 
 		board = swapBoard(reply, board);
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
-        messageTo = sendBoard(board);
-        puts(messageTo);
-        write(client_sock , messageTo , maxChar);
+        message = sendBoard(board);
+        write(client_sock , message , maxChar);
     }
 
     if(read_size == 0)
     {
         puts("Client disconnected");
+        free(board);
+    	free(message);
+    	free(reply);
         fflush(stdout);
     }
     else if(read_size == -1)
     {
         perror("recv failed");
     }
-
-    free(board);
     return 0;
 }

@@ -2,6 +2,7 @@
 
 char empty = '-';
 
+/*Initializes brand new board to empty*/
 char** initializeBoard()
 {
 	char **board = malloc(size * sizeof(char *));
@@ -21,6 +22,7 @@ char** initializeBoard()
 	return board;
 }
 
+/*Swaps the board after each message/reply*/
 char** swapBoard(char* reply, char** board)
 {
 	int col = 0;
@@ -48,7 +50,7 @@ char** swapBoard(char* reply, char** board)
 }
 
 
-/* Draws the game board to stdout. */
+/* puts 2D board into a single message for writing*/
 char* sendBoard(char** board)
 {
 	int count = 0;
@@ -228,9 +230,9 @@ Move findBestMove(char** board, char player)
     // Traverse all cells, evalutae minimax function for
     // all empty cells. And return the cell with optimal
     // value.
-    for (int i = 0; i<3; i++)
+    for (int i = 0; i<size; i++)
     {
-        for (int j = 0; j<3; j++)
+        for (int j = 0; j<size; j++)
         {
             // Check if cell is empty
             if (board[i][j] == empty)
@@ -261,6 +263,9 @@ Move findBestMove(char** board, char player)
     return bestMove;
 }
 
+/*Generates a uniformly random distribution from the specified
+  range. The range is inclusive.
+*/
 int uniform_distribution(int rangeLow, int rangeHigh) 
 {
     double myRand = rand()/(1.0 + RAND_MAX); 
@@ -269,6 +274,7 @@ int uniform_distribution(int rangeLow, int rangeHigh)
     return myRand_scaled;
 }
 
+/*Helper extracted from initialize board*/
 char** setBoard(char** board)
 {
 	for (int row = 0; row < size; ++row)

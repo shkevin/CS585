@@ -14,6 +14,8 @@
 
 #define maxChar 13
 #define size 3
+#define maxGames 20
+#define port 8888
 
 typedef struct Move
 {
