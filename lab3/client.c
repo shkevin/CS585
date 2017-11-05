@@ -62,11 +62,12 @@ int main(int argc , char *argv[])
             // printf("Game # %d\n", gameCounter);
             bestMove.row = uniform_distribution(0,size-1);
             bestMove.col = uniform_distribution(0,size-1);
+            printf("Row: %d , Col: %d\n", bestMove.row, bestMove.col);
             board[bestMove.row][bestMove.col] = player;
+            message = sendBoard(board);
             first = false;
         }
 
-        message = sendBoard(board);
         if( send(sock, message, maxChar , 0) < 0)
         {
             //process first move here

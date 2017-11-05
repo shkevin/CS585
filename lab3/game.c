@@ -154,9 +154,9 @@ int minimax(char** board, int depth, bool isMax)
 		int best = -1000;
 
         // Traverse all cells
-		for (int i = 0; i<3; i++)
+		for (int i = 0; i<size; i++)
 		{
-			for (int j = 0; j<3; j++)
+			for (int j = 0; j<size; j++)
 			{
                 // Check if cell is empty
 				if (board[i][j]==empty)
@@ -183,9 +183,9 @@ int minimax(char** board, int depth, bool isMax)
 		int best = 1000;
 
         // Traverse all cells
-		for (int i = 0; i<3; i++)
+		for (int i = 0; i<size; i++)
 		{
-			for (int j = 0; j<3; j++)
+			for (int j = 0; j<size; j++)
 			{
                 // Check if cell is empty
 				if (board[i][j]== empty)
