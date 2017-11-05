@@ -13,8 +13,11 @@ int main(int argc , char *argv[])
     bool first = true;
     char* serverReply = malloc(maxChar*sizeof(char));
     char* message = malloc(maxChar*sizeof(char));
+    char* messageTo = malloc(maxChar*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
+
+    message = sendBoard(board);
 
     player = 'X';
     opponent = 'O';
@@ -52,22 +55,17 @@ int main(int argc , char *argv[])
             break;
         }
 
-
         if (first)
         {
+            puts("Fresh board");
+            puts(message);
             bestMove.row = uniform_distribution(0,size-1);
             bestMove.col = uniform_distribution(0,size-1);
+            board[bestMove.row][bestMove.col] = player;
             first = false;
         }
-        else 
-        {
-            bestMove = findBestMove(board);
-        }
-        board[bestMove.row][bestMove.col] = player;
+
         message = sendBoard(board);
-
-        puts(message);
-
         if( send(sock, message, maxChar , 0) < 0)
         {
             //process first move here
@@ -82,8 +80,14 @@ int main(int argc , char *argv[])
             break;
         }
 
-        board = swapBoard(serverReply, board);
         puts(serverReply);
+        puts("swapping board from server");
+        board = swapBoard(serverReply, board);
+        bestMove = findBestMove(board, player);
+        board[bestMove.row][bestMove.col] = player;
+        message = sendBoard(board);
+        puts("after client move");
+        puts(message);
     }
 
     close(sock);

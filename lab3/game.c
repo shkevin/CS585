@@ -10,13 +10,14 @@ char** initializeBoard()
 		board[i] = malloc(size * sizeof(char));
 	}
 
-	for (int row = 0; row < size; ++row)
-	{
-		for (int col = 0; col < size; ++col)
-		{
-			board[row][col] = empty;
-		}
-	}
+	// for (int row = 0; row < size; ++row)
+	// {
+	// 	for (int col = 0; col < size; ++col)
+	// 	{
+	// 		board[row][col] = empty;
+	// 	}
+	// }
+	board = setBoard(board);
 	return board;
 }
 
@@ -32,14 +33,16 @@ char** swapBoard(char* reply, char** board)
 		}
 		if (reply[i] == '|')
 		{
-			col++;
+			row++;
+			col = 0;
+			continue;
 		}
 		if (reply[i] == '\\')
 		{
 			break;
 		}
 		board[row][col] = reply[i];
-		row++;
+		col++;
 	}
 	return board;
 }
@@ -215,7 +218,7 @@ bool isMovesLeft(char** board)
 }
 
 // This will return the best possible move for the player
-Move findBestMove(char** board)
+Move findBestMove(char** board, char player)
 {
     int bestVal = -1000;
     Move bestMove;
@@ -264,4 +267,16 @@ int uniform_distribution(int rangeLow, int rangeHigh)
     int range = rangeHigh - rangeLow + 1;
     int myRand_scaled = (myRand * range) + rangeLow;
     return myRand_scaled;
+}
+
+char** setBoard(char** board)
+{
+	for (int row = 0; row < size; ++row)
+	{
+		for (int col = 0; col < size; ++col)
+		{
+			board[row][col] = empty;
+		}
+	}
+	return board;
 }
