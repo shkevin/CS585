@@ -12,7 +12,7 @@
 #define maxChar 13
 #define size 3
 #define maxGames 20
-#define port 4287
+#define port 707
 
 
 typedef struct Move
