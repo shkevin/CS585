@@ -183,6 +183,10 @@ char** swapBoard(char* reply, char** board)
             col = 0;
             continue;
         }
+        if (reply[i] == '\n')
+        {
+            break;
+        }
         if (reply[i] == '\\')
         {
             break;
@@ -216,7 +220,7 @@ char* sendBoard(char** board)
     }
     msg[count] = '\\';
     msg[count+1] = 'n';
-    // msg[count+2] = '\n';
+    msg[count+2] = '\n';
     return msg;
 }
 
