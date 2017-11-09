@@ -104,7 +104,7 @@ int main(int argc , char *argv[])
             send(sock, tie, strlen(tie), 0);
         }
 
-        if( send(sock, message, maxChar+1 , 0) < 0)
+        if(strlen(message) == 13 && send(sock, message, strlen(message) , 0) < 0)
         {
             //process first move here
             puts("Send failed");
