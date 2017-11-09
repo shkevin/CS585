@@ -185,7 +185,7 @@ char** swapBoard(char* reply, char** board)
         }
         if (reply[i] == '\n')
         {
-            break;
+            continue;
         }
         if (reply[i] == '\\')
         {
