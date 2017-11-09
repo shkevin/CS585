@@ -114,7 +114,7 @@ int main(int argc , char *argv[])
             break;
         }
 
-        printf("Sherman's %s", serverReply);
+        printf("Sherman's %s\n", serverReply);
         if (serverReply == "tie")
         {
             board = setBoard(board);
