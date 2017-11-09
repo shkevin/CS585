@@ -99,6 +99,11 @@ int main(int argc , char *argv[])
             first = false;
         }
 
+        if (!isMovesLeft(board))
+        {   
+            send(sock, tie, strlen(tie), 0);
+        }
+
         if( send(sock, message, maxChar+1 , 0) < 0)
         {
             //process first move here
@@ -107,11 +112,6 @@ int main(int argc , char *argv[])
         }
 
         printf("Kevin's %s\n", message);
-
-        if (!isMovesLeft(board))
-        {   
-            send(sock, tie, strlen(tie), 0);
-        }
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
