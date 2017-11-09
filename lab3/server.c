@@ -86,7 +86,7 @@ int main(int argc , char *argv[])
     //Receive a message from client
     while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
     {
-    	puts(reply);
+    	strlen(reply);
     	
         //Send the message back to client
         if (strlen(reply) == 3)
