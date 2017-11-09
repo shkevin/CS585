@@ -90,6 +90,7 @@ int main(int argc , char *argv[])
         if (reply[0] == 't')
         {
         	puts(message);
+        	puts(reply);
         	board = setBoard(board);
         	memset(message, 20, 0);
         	memset(reply, 20, 0);
