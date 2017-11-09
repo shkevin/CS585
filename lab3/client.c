@@ -12,7 +12,7 @@
 #define maxChar 13
 #define size 3
 #define maxGames 1
-#define port 707
+#define port 4707
 
 
 typedef struct Move
@@ -41,8 +41,8 @@ int main(int argc , char *argv[])
     struct sockaddr_in server;
     Move bestMove;
     bool first = true;
-    char* serverReply = malloc((maxChar+1)*sizeof(char));
-    char* message = malloc((maxChar+1)*sizeof(char));
+    char* serverReply = malloc(20*sizeof(char));
+    char* message = malloc(20*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
@@ -103,7 +103,7 @@ int main(int argc , char *argv[])
         message[13] = '\n';
         printf("size of message = %ld \n", strlen(message));
         printf("msg to %s\n", message);
-        if(strlen(message) == 14 && send(sock, message, maxChar+1 , 0) < 0)
+        if(send(sock, message, strlen(message) , 0) < 0)
         {
             //process first move here
             puts("Send failed");
@@ -111,12 +111,13 @@ int main(int argc , char *argv[])
         }
 
         //Receive a reply from the server
-        if(recv(sock , serverReply , maxChar , 0) < 0)
+        if(recv(sock , serverReply , 14 , 0) < 0)
         {
             puts("Receive failed");
             break;
         }
         printf("msg from %s\n", serverReply);
+        printf("length from %ld\n", strlen(serverReply));
         if (serverReply == "tie")
         {
             board = setBoard(board);
@@ -134,7 +135,7 @@ int main(int argc , char *argv[])
             continue;
         }
         // printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
-        board = swapBoard(serverReply, board);
+        if(strlen(serverReply) == 13) board = swapBoard(serverReply, board);
         // printf("After swap %s\n", sendBoard(board));
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
@@ -167,7 +168,7 @@ char** swapBoard(char* reply, char** board)
     int row = 0;
     for (int i = 0; i < maxChar; ++i)
     {
-        if (row >= 3)
+        if (row >= size)
         {
             row = 0;
         }

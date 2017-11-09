@@ -10,7 +10,7 @@
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define maxChar 13
 #define size 3
-#define port 707
+#define port 4707
 
 typedef struct Move
 {
@@ -34,8 +34,8 @@ int main(int argc , char *argv[])
 {
     int socket_desc , client_sock , c , read_size;
     struct sockaddr_in server , client;
-    char* reply = malloc((maxChar+2)*sizeof(char));
-    char* message = malloc((maxChar+2)*sizeof(char));
+    char* reply = malloc(20*sizeof(char));
+    char* message = malloc(20*sizeof(char));
     char** board = initializeBoard();
     Move move;
     player = 'O';
@@ -83,7 +83,7 @@ int main(int argc , char *argv[])
     puts("Connection accepted");
 
     //Receive a message from client
-    while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
+    while( (read_size = recv(client_sock , reply , 14 , 0)) > 0 )
     {
         //Send the message back to client
         if (!isMovesLeft(board))
