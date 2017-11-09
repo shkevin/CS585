@@ -98,12 +98,14 @@ int main(int argc , char *argv[])
             first = false;
         }
 
-        if( send(sock, message, maxChar , 0) < 0)
+        if( send(sock, message+'\n', maxChar , 0) < 0)
         {
             //process first move here
             puts("Send failed");
             return 1;
         }
+
+        puts("sending message to server")
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
