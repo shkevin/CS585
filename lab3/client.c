@@ -105,7 +105,7 @@ int main(int argc , char *argv[])
             return 1;
         }
 
-        puts("sending message to server")
+        puts("sending message to server");
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
