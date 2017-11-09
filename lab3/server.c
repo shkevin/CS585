@@ -10,7 +10,7 @@
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define maxChar 13
 #define size 3
-#define port 4707
+#define port 707
 
 typedef struct Move
 {
