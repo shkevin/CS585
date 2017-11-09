@@ -114,7 +114,7 @@ int main(int argc , char *argv[])
         printf("Kevin's %s\n", message);
 
         //Receive a reply from the server
-        if(recv(sock , serverReply , maxChar , 0) < 0)
+        if(recv(sock , serverReply , 14 , 0) < 0)
         {
             puts("Receive failed");
             break;
