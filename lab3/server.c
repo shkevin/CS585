@@ -41,7 +41,6 @@ int main(int argc , char *argv[])
     player = 'O';
     opponent = 'X';
     message[13] = '\n';
-    message[14] = '\0';
 
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
@@ -103,8 +102,9 @@ int main(int argc , char *argv[])
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
+        message[13] = '\n';
         puts(message);
-        write(client_sock , message , maxChar);
+        write(client_sock , message , strlen(message));
     }
 
     if(read_size == 0)
