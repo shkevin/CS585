@@ -89,7 +89,7 @@ int main(int argc , char *argv[])
         //Send the message back to client
         if (reply[0] == 't')
         {
-        	puts(reply);
+        	puts(message);
         	board = setBoard(board);
         	memset(message, 20, 0);
         	memset(reply, 20, 0);
