@@ -69,7 +69,7 @@ int main(int argc , char *argv[])
     puts("bind done");
 
     //Listen
-    listen(socket_desc , 5);
+    listen(socket_desc , 3);
 
     //Accept and incoming connection
     puts("Waiting for incoming connections...");
