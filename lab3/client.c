@@ -162,10 +162,6 @@ char** swapBoard(char* reply, char** board)
     int row = 0;
     for (int i = 0; i < maxChar; ++i)
     {
-        if (reply[i] = '\n')
-        {
-            break;
-        }
         if (row >= 3)
         {
             row = 0;
