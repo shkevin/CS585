@@ -42,7 +42,7 @@ int main(int argc , char *argv[])
     Move bestMove;
     bool first = true;
     char* serverReply = malloc(maxChar*sizeof(char));
-    char* message = malloc(maxChar*sizeof(char)+sizeof(char));
+    char* message = malloc(maxChar*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
@@ -199,7 +199,7 @@ char** swapBoard(char* reply, char** board)
 char* sendBoard(char** board)
 {
     int count = 0;
-    char* msg = malloc(maxChar*sizeof(char)+sizeof(char));
+    char* msg = malloc(size*size*sizeof(char));
 
     for (int i = 0; i < size; i++)
     {
@@ -216,8 +216,6 @@ char* sendBoard(char** board)
     }
     msg[count] = '\\';
     msg[count+1] = 'n';
-    msg[count+2] = '\n';
-    puts(msg);
     return msg;
 }
 
