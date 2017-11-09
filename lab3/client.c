@@ -122,15 +122,15 @@ int main(int argc , char *argv[])
         }
         printf("msg from %s\n", serverReply);
         printf("length from %ld\n", strlen(serverReply));
-        if (serverReply == "tie")
-        {
-            board = setBoard(board);
-            memset(message, 14, 0);
-            message[13] = '\n';
-            first = true;
-            // puts(message);
-            continue;
-        }
+        // if (serverReply == "tie")
+        // {
+        //     board = setBoard(board);
+        //     memset(message, 14, 0);
+        //     message[13] = '\n';
+        //     first = true;
+        //     // puts(message);
+        //     continue;
+        // }
         
         
         // printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
