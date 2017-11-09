@@ -87,7 +87,7 @@ int main(int argc , char *argv[])
     //Receive a message from client
     while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
     {
-    	puts(reply);
+    	
         //Send the message back to client
         if (!isMovesLeft(board))
         {
@@ -96,10 +96,14 @@ int main(int argc , char *argv[])
         	continue;
         }
 
+        puts("before swap");
+        puts(reply);
 		board = swapBoard(reply, board);
+		puts("after swap");
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
+        puts(message);
         write(client_sock , message , maxChar);
     }
 
