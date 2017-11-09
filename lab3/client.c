@@ -76,6 +76,7 @@ int main(int argc , char *argv[])
     //keep communicating with server
     while(1)
     {
+        printf("tie %ld\n", strlen(tie));
         if (!isMovesLeft(board))
         {
             send(sock, tie, strlen(tie), 0);
