@@ -90,7 +90,7 @@ int main(int argc , char *argv[])
             gameCounter++;
             if (gameCounter > maxGames)
             {
-                break;
+                return 0;
             }
             // printf("Game # %d\n", gameCounter);
             bestMove.row = uniform_distribution(0,size-1);
