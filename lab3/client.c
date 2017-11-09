@@ -48,6 +48,7 @@ int main(int argc , char *argv[])
     int gameCounter = 0;
     char tie[4] = {'t','i','e','\n'};
     message[13] = '\n';
+    char quit[5] = {'q','u','i','t','\n'};
 
     player = 'X';
     opponent = 'O';
@@ -90,6 +91,7 @@ int main(int argc , char *argv[])
             gameCounter++;
             if (gameCounter > maxGames)
             {
+                send(sock, quit, 5, 0);
                 return 0;
             }
             // printf("Game # %d\n", gameCounter);
