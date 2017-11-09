@@ -115,7 +115,7 @@ int main(int argc , char *argv[])
         }
 
         //Receive a reply from the server
-        if(recv(sock , serverReply , strlen(serverReply) , 0) < 0)
+        if(recv(sock , serverReply , 14 , 0) < 0)
         {
             puts("Receive failed");
             break;
