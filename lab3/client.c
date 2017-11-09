@@ -99,11 +99,6 @@ int main(int argc , char *argv[])
             first = false;
         }
 
-        if (!isMovesLeft(board))
-        {   
-            send(sock, tie, strlen(tie), 0);
-        }
-
         if( send(sock, message, strlen(message) , 0) < 0)
         {
             //process first move here
@@ -129,6 +124,10 @@ int main(int argc , char *argv[])
         }
         printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
         board = swapBoard(serverReply, board);
+        if (!isMovesLeft(board))
+        {   
+            send(sock, tie, strlen(tie), 0);
+        }
         printf("After swap %s\n", sendBoard(board));
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
