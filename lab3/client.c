@@ -11,7 +11,7 @@
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define maxChar 13
 #define size 3
-#define maxGames 1
+#define maxGames 20
 #define port 707
 
 
