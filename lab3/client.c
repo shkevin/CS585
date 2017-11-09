@@ -98,10 +98,7 @@ int main(int argc , char *argv[])
             first = false;
         }
 
-        char *test = message+'j';
-        puts(test);
-
-        if( send(sock, test, 14 , 0) < 0)
+        if( send(sock, message, 14 , 0) < 0)
         {
             //process first move here
             puts("Send failed");
@@ -188,7 +185,7 @@ char** swapBoard(char* reply, char** board)
 char* sendBoard(char** board)
 {
     int count = 0;
-    char* msg = malloc(size*size*sizeof(char));
+    char* msg = malloc(size*size*sizeof(char) + sizeof(char));
 
     for (int i = 0; i < size; i++)
     {
@@ -205,6 +202,7 @@ char* sendBoard(char** board)
     }
     msg[count] = '\\';
     msg[count+1] = 'n';
+    msg[count+2] = 'j';
     return msg;
 }
 
