@@ -180,6 +180,10 @@ char** swapBoard(char* reply, char** board)
         {
             break;
         }
+        if (reply[i] == '\n')
+        {
+            printf("new line\n");
+        }
         // printf("char %c\n", reply[i]);
         board[row][col] = reply[i];
         col++;
