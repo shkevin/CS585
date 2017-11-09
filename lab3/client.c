@@ -127,7 +127,7 @@ int main(int argc , char *argv[])
             // puts(message);
             continue;
         }
-        printf("Before swap %s\n", serverReply);
+        printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
         board = swapBoard(serverReply, board);
         printf("After swap %s\n", sendBoard(board));
         bestMove = findBestMove(board, player);
