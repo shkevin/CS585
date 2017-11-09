@@ -79,7 +79,7 @@ int main(int argc , char *argv[])
         printf("tie %s %ld\n", tie, strlen(tie));
         if (!isMovesLeft(board))
         {
-            send(sock, tie, strlen(tie), 0);
+            send(sock, tie, 4, 0);
             board = setBoard(board);
             first = true;
             puts(message);
