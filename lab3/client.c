@@ -131,9 +131,9 @@ int main(int argc , char *argv[])
             // puts(message);
             continue;
         }
-        printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
+        // printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
         board = swapBoard(serverReply, board);
-        printf("After swap %s\n", sendBoard(board));
+        // printf("After swap %s\n", sendBoard(board));
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
         message = sendBoard(board);
@@ -187,7 +187,7 @@ char** swapBoard(char* reply, char** board)
         {
             break;
         }
-        printf("char %c\n", reply[i]);
+        // printf("char %c\n", reply[i]);
         board[row][col] = reply[i];
         col++;
     }
