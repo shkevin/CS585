@@ -42,7 +42,7 @@ int main(int argc , char *argv[])
     Move bestMove;
     bool first = true;
     char* serverReply = malloc(maxChar*sizeof(char));
-    char* message = malloc(maxChar*sizeof(char));
+    char* message = malloc(maxChar*sizeof(char)+sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
@@ -122,8 +122,7 @@ int main(int argc , char *argv[])
             // puts(message);
             continue;
         }
-        printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
-        board = swapBoard(serverReply, board);
+        
         if (!isMovesLeft(board))
         {   
             send(sock, tie, strlen(tie), 0);
@@ -132,6 +131,8 @@ int main(int argc , char *argv[])
             // puts(message);
             continue;
         }
+        printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
+        board = swapBoard(serverReply, board);
         printf("After swap %s\n", sendBoard(board));
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
