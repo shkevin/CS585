@@ -186,6 +186,7 @@ char** swapBoard(char* reply, char** board)
         {
             break;
         }
+        printf("char %c\n", reply[i]);
         board[row][col] = reply[i];
         col++;
     }
