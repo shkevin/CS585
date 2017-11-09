@@ -87,7 +87,7 @@ int main(int argc , char *argv[])
     while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
     {    	
         //Send the message back to client
-        if (reply[0] == 't')
+        if (reply == "tie")
         {
         	puts(message);
         	puts(reply);
@@ -99,7 +99,7 @@ int main(int argc , char *argv[])
         }
 
 		board = swapBoard(reply, board);
-		memset(reply, 20, 0);
+		memset(reply, 0, 20);
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
