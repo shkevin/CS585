@@ -105,7 +105,7 @@ int main(int argc , char *argv[])
             return 1;
         }
 
-        puts(message);
+        printf("Kevin's %s\n", message);
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
@@ -113,6 +113,8 @@ int main(int argc , char *argv[])
             puts("Receive failed");
             break;
         }
+
+        printf("Sherman's %s", serverReply);
         if (serverReply == "tie")
         {
             board = setBoard(board);
