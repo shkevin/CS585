@@ -11,7 +11,7 @@
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define maxChar 13
 #define size 3
-#define maxGames 20
+#define maxGames 1
 #define port 707
 
 
@@ -101,8 +101,7 @@ int main(int argc , char *argv[])
         }
         memset(message, 14, 0);
         message[13] = '\n';
-        printf("msg to send %s\n", message);
-        printf("size %ld\n", strlen(message));
+        printf("msg to %s\n", message);
         if( send(sock, message, maxChar+1 , 0) < 0)
         {
             //process first move here
