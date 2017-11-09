@@ -101,8 +101,9 @@ int main(int argc , char *argv[])
         }
         memset(message, 14, 0);
         message[13] = '\n';
+        printf("size of message = %ld \n", strlen(message));
         printf("msg to %s\n", message);
-        if( send(sock, message, maxChar+1 , 0) < 0)
+        if(strlen(message) == 14 && send(sock, message, maxChar+1 , 0) < 0)
         {
             //process first move here
             puts("Send failed");
