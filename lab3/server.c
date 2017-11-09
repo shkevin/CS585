@@ -96,10 +96,7 @@ int main(int argc , char *argv[])
         	continue;
         }
 
-        puts("before swap");
-        puts(reply);
 		board = swapBoard(reply, board);
-		puts("after swap");
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
