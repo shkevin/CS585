@@ -76,14 +76,14 @@ int main(int argc , char *argv[])
     //keep communicating with server
     while(1)
     {
-        if (!isMovesLeft(board))
-        {
-            send(sock, tie, strlen(tie), 0);
-            board = setBoard(board);
-            first = true;
-            puts(message);
-            continue;
-        }
+        // if (!isMovesLeft(board))
+        // {
+        //     send(sock, tie, strlen(tie), 0);
+        //     board = setBoard(board);
+        //     first = true;
+        //     puts(message);
+        //     continue;
+        // }
 
         if (first)
         {
