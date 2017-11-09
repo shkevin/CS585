@@ -103,10 +103,10 @@ int main(int argc , char *argv[])
             message = sendBoard(board);
             first = false;
         }
-        // memset(message, 14, 0);
-        // message[13] = '\n';
-        // printf("size of message = %ld \n", strlen(message));
-        // printf("msg to %s\n", message);
+        memset(message, 14, 0);
+        message[13] = '\n';
+        printf("size of message = %ld \n", strlen(message));
+        printf("msg to %s\n", message);
         if(send(sock, message, strlen(message) , 0) < 0)
         {
             //process first move here
