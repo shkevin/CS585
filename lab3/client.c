@@ -41,14 +41,13 @@ int main(int argc , char *argv[])
     struct sockaddr_in server;
     Move bestMove;
     bool first = true;
-    char* serverReply = malloc((maxChar+2)*sizeof(char));
-    char* message = malloc((maxChar+2)*sizeof(char));
+    char* serverReply = malloc((maxChar+1)*sizeof(char));
+    char* message = malloc((maxChar+1)*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
     char tie[4] = {'t','i','e','\n'};
     message[13] = '\n';
-    message[14] = '\0';
 
     player = 'X';
     opponent = 'O';
@@ -102,7 +101,6 @@ int main(int argc , char *argv[])
         }
         memset(message, 15, 0);
         message[13] = '\n';
-        message[14] = '\0';
         printf("msg to send %s\n", message);
         printf("size %ld\n", strlen(message));
         if( send(sock, message, maxChar , 0) < 0)
