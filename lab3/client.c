@@ -98,7 +98,9 @@ int main(int argc , char *argv[])
             first = false;
         }
 
-        if( send(sock, message+'j', 14 , 0) < 0)
+        char *test = message+'j';
+
+        if( send(sock, test, 14 , 0) < 0)
         {
             //process first move here
             puts("Send failed");
