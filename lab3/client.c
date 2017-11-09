@@ -100,6 +100,9 @@ int main(int argc , char *argv[])
             message = sendBoard(board);
             first = false;
         }
+        memset(message, 15, 0);
+        message[13] = '\n';
+        message[14] = '\0';
         printf("msg to send %s\n", message);
         if( send(sock, message, maxChar , 0) < 0)
         {
