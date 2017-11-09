@@ -99,6 +99,7 @@ int main(int argc , char *argv[])
         }
 
         char *test = message+'j';
+        puts(test);
 
         if( send(sock, test, 14 , 0) < 0)
         {
@@ -110,7 +111,7 @@ int main(int argc , char *argv[])
         puts(message);
 
         //Receive a reply from the server
-        if(recv(sock , serverReply , maxChar , 0) < 0)
+        if(recv(sock , serverReply , 14 , 0) < 0)
         {
             puts("Receive failed");
             break;
