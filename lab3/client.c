@@ -136,16 +136,16 @@ int main(int argc , char *argv[])
         // printf("Before swap %s, %ld\n", serverReply, strlen(serverReply));
         if(strlen(serverReply) == 13) board = swapBoard(serverReply, board);
         // printf("After swap %s\n", sendBoard(board));
-        if (!isMovesLeft(board))
-        {   
-            send(sock, tie, strlen(tie), 0);
-            board = setBoard(board);
-            memset(message, 14, 0);
-            message[13] = '\n';
-            first = true;
-            // puts(message);
-            continue;
-        }
+        // if (!isMovesLeft(board))
+        // {   
+        //     send(sock, tie, strlen(tie), 0);
+        //     board = setBoard(board);
+        //     memset(message, 14, 0);
+        //     message[13] = '\n';
+        //     first = true;
+        //     // puts(message);
+        //     continue;
+        // }
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
         message = sendBoard(board);
