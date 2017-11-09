@@ -89,7 +89,7 @@ int main(int argc , char *argv[])
     	printf("%ld\n", strlen(reply));
     	
         //Send the message back to client
-        if (strlen(reply) == 3)
+        if (reply[0] == 't')
         {
         	printf("tie %s\n", reply);
         	board = setBoard(board);
