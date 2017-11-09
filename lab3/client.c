@@ -97,7 +97,7 @@ int main(int argc , char *argv[])
             bestMove.col = uniform_distribution(0,size-1);
             memset(message, 14, 0);
             message[13] = '\n';
-            printf("Row: %d , Col: %d\n", bestMove.row, bestMove.col);
+            // printf("Row: %d , Col: %d\n", bestMove.row, bestMove.col);
             board[bestMove.row][bestMove.col] = player;
 
             message = sendBoard(board);
@@ -105,8 +105,6 @@ int main(int argc , char *argv[])
         }
         memset(message, 14, 0);
         message[13] = '\n';
-        printf("size of message = %ld \n", strlen(message));
-        printf("msg to %s\n", message);
         if(send(sock, message, strlen(message) , 0) < 0)
         {
             //process first move here
@@ -120,8 +118,8 @@ int main(int argc , char *argv[])
             puts("Receive failed");
             break;
         }
-        printf("msg from %s\n", serverReply);
-        printf("length from %ld\n", strlen(serverReply));
+        // printf("msg from %s\n", serverReply);
+        // printf("length from %ld\n", strlen(serverReply));
         // if (serverReply == "tie")
         // {
         //     board = setBoard(board);
