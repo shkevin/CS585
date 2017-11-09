@@ -120,7 +120,6 @@ int main(int argc , char *argv[])
             break;
         }
 
-        printf("Sherman's %s\n", serverReply);
         if (serverReply == "tie")
         {
             board = setBoard(board);
@@ -128,7 +127,9 @@ int main(int argc , char *argv[])
             // puts(message);
             continue;
         }
+        printf("Before swap %s\n", serverReply);
         board = swapBoard(serverReply, board);
+        printf("After swap %s\n", sendBoard(board));
         bestMove = findBestMove(board, player);
         board[bestMove.row][bestMove.col] = player;
         message = sendBoard(board);
