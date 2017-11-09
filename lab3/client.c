@@ -99,11 +99,11 @@ int main(int argc , char *argv[])
             message = sendBoard(board);
             first = false;
         }
-        memset(message, 15, 0);
+        memset(message, 14, 0);
         message[13] = '\n';
         printf("msg to send %s\n", message);
         printf("size %ld\n", strlen(message));
-        if( send(sock, message, maxChar , 0) < 0)
+        if( send(sock, message, maxChar+1 , 0) < 0)
         {
             //process first move here
             puts("Send failed");
