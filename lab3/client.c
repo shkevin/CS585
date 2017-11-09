@@ -183,10 +183,6 @@ char** swapBoard(char* reply, char** board)
             col = 0;
             continue;
         }
-        if (reply[i] == '\n')
-        {
-            continue;
-        }
         if (reply[i] == '\\')
         {
             break;
