@@ -104,6 +104,7 @@ int main(int argc , char *argv[])
         message[13] = '\n';
         message[14] = '\0';
         printf("msg to send %s\n", message);
+        printf("size %ld\n", strlen(message));
         if( send(sock, message, maxChar , 0) < 0)
         {
             //process first move here
