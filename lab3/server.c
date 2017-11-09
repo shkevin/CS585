@@ -51,10 +51,12 @@ int main(int argc , char *argv[])
     }
     puts("Socket created");
 
+    bzero((char *) &server, sizeof(server));
+
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     // server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_addr.s_addr = htonl(INADDR_ANY);
+    server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = htons( port );
 
     //Bind
@@ -67,7 +69,7 @@ int main(int argc , char *argv[])
     puts("bind done");
 
     //Listen
-    listen(socket_desc , 3);
+    listen(socket_desc , 5);
 
     //Accept and incoming connection
     puts("Waiting for incoming connections...");
