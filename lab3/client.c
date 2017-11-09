@@ -106,8 +106,6 @@ int main(int argc , char *argv[])
             return 1;
         }
 
-        printf("Kevin's %s\n", message);
-
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
         {
