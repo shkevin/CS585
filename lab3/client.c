@@ -11,7 +11,7 @@
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define maxChar 13
 #define size 3
-#define maxGames 20
+#define maxGames 1
 #define port 707
 
 
@@ -42,7 +42,7 @@ int main(int argc , char *argv[])
     Move bestMove;
     bool first = true;
     char* serverReply = malloc(maxChar*sizeof(char));
-    char* message = malloc(maxChar*sizeof(char) + sizeof(char));
+    char* message = malloc(maxChar*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
@@ -104,7 +104,7 @@ int main(int argc , char *argv[])
             send(sock, tie, strlen(tie), 0);
         }
 
-        if(strlen(message) == 14 && send(sock, message, strlen(message) , 0) < 0)
+        if( send(sock, message, strlen(message) , 0) < 0)
         {
             //process first move here
             puts("Send failed");
@@ -114,7 +114,7 @@ int main(int argc , char *argv[])
         printf("Kevin's %s\n", message);
 
         //Receive a reply from the server
-        if(recv(sock , serverReply , 13 , 0) < 0)
+        if(recv(sock , serverReply , maxChar , 0) < 0)
         {
             puts("Receive failed");
             break;
