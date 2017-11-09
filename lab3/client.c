@@ -46,7 +46,7 @@ int main(int argc , char *argv[])
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
-    char tie[3] = {'t','i','e'};
+    char tie[4] = {'t','i','e','\n'};
     message[13] = '\n';
 
     player = 'X';
