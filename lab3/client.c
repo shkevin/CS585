@@ -11,8 +11,8 @@
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 #define maxChar 13
 #define size 3
-#define maxGames 20
-#define port 707
+#define maxGames 1
+#define port 4707
 
 
 typedef struct Move
@@ -41,12 +41,14 @@ int main(int argc , char *argv[])
     struct sockaddr_in server;
     Move bestMove;
     bool first = true;
-    char* serverReply = malloc(maxChar*sizeof(char));
-    char* message = malloc(maxChar*sizeof(char));
+    char* serverReply = malloc((maxChar+2)*sizeof(char));
+    char* message = malloc((maxChar+2)*sizeof(char));
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
     char tie[4] = {'t','i','e','\n'};
+    message[13] = '\n';
+    message[14] = '\0';
 
     player = 'X';
     opponent = 'O';
@@ -98,7 +100,7 @@ int main(int argc , char *argv[])
             message = sendBoard(board);
             first = false;
         }
-
+        printf("msg to send %s\n", message);
         if( send(sock, message, maxChar , 0) < 0)
         {
             //process first move here
@@ -112,7 +114,7 @@ int main(int argc , char *argv[])
             puts("Receive failed");
             break;
         }
-
+        printf("msg from %s\n", serverReply);
         if (serverReply == "tie")
         {
             board = setBoard(board);
@@ -152,14 +154,6 @@ char** initializeBoard()
     {
         board[i] = malloc(size * sizeof(char));
     }
-
-    // for (int row = 0; row < size; ++row)
-    // {
-    //  for (int col = 0; col < size; ++col)
-    //  {
-    //      board[row][col] = empty;
-    //  }
-    // }
     board = setBoard(board);
     return board;
 }
@@ -197,7 +191,7 @@ char** swapBoard(char* reply, char** board)
 char* sendBoard(char** board)
 {
     int count = 0;
-    char* msg = malloc(maxChar*sizeof(char));
+    char* msg = malloc((maxChar+2)*sizeof(char));
 
     for (int i = 0; i < size; i++)
     {
