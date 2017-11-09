@@ -199,7 +199,7 @@ char** swapBoard(char* reply, char** board)
 char* sendBoard(char** board)
 {
     int count = 0;
-    char* msg = malloc(maxChar*sizeof(char));
+    char* msg = malloc(maxChar*sizeof(char)+sizeof(char));
 
     for (int i = 0; i < size; i++)
     {
