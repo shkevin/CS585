@@ -78,6 +78,7 @@ int main(int argc , char *argv[])
     {
         if (!isMovesLeft(board))
         {
+            send(sock, tie, strlen(tie), 0);
             board = setBoard(board);
             first = true;
             puts(message);
