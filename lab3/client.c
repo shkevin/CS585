@@ -94,8 +94,11 @@ int main(int argc , char *argv[])
             // printf("Game # %d\n", gameCounter);
             bestMove.row = uniform_distribution(0,size-1);
             bestMove.col = uniform_distribution(0,size-1);
+            memset(message, 14, 0);
+            message[13] = '\n';
             printf("Row: %d , Col: %d\n", bestMove.row, bestMove.col);
             board[bestMove.row][bestMove.col] = player;
+
             message = sendBoard(board);
             first = false;
         }
@@ -121,6 +124,8 @@ int main(int argc , char *argv[])
         if (serverReply == "tie")
         {
             board = setBoard(board);
+            memset(message, 14, 0);
+            message[13] = '\n';
             first = true;
             // puts(message);
             continue;
@@ -134,6 +139,8 @@ int main(int argc , char *argv[])
         {   
             send(sock, tie, strlen(tie), 0);
             board = setBoard(board);
+            memset(message, 14, 0);
+            message[13] = '\n';
             first = true;
             // puts(message);
             continue;
