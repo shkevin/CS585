@@ -85,13 +85,10 @@ int main(int argc , char *argv[])
 
     //Receive a message from client
     while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
-    {
-    	printf("%ld\n", strlen(reply));
-    	
+    {    	
         //Send the message back to client
         if (reply[0] == 't')
         {
-        	printf("tie %s\n", reply);
         	board = setBoard(board);
         	memset(message, 20, 0);
         	memset(reply, 20, 0);
