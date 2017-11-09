@@ -199,7 +199,7 @@ char** swapBoard(char* reply, char** board)
 char* sendBoard(char** board)
 {
     int count = 0;
-    char* msg = malloc(size*size*sizeof(char) + sizeof(char));
+    char* msg = malloc(size*size*sizeof(char));
 
     for (int i = 0; i < size; i++)
     {
@@ -216,7 +216,7 @@ char* sendBoard(char** board)
     }
     msg[count] = '\\';
     msg[count+1] = 'n';
-    msg[count+2] = '\n';
+    // msg[count+2] = '\n';
     return msg;
 }
 
