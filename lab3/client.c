@@ -216,7 +216,7 @@ char* sendBoard(char** board)
     }
     msg[count] = '\\';
     msg[count+1] = 'n';
-    msg[count+2] = '\n';
+    // msg[count+2] = '\n';
     return msg;
 }
 
