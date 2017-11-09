@@ -88,10 +88,11 @@ int main(int argc , char *argv[])
     {
     	
         //Send the message back to client
-        if (!isMovesLeft(board))
+        if (reply == "tie")
         {
         	board = setBoard(board);
-        	write(client_sock, "tie", strlen("tie"));
+        	memset(message, 20, 0);
+        	message[13] = '\n';
         	continue;
         }
 
