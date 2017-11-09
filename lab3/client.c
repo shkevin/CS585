@@ -46,6 +46,7 @@ int main(int argc , char *argv[])
     char** board = initializeBoard();
     srand((unsigned)time(NULL));
     int gameCounter = 0;
+    char tie[4] = {'t','i','e','\n'};
 
     player = 'X';
     opponent = 'O';
@@ -106,6 +107,11 @@ int main(int argc , char *argv[])
         }
 
         printf("Kevin's %s\n", message);
+
+        if (!isMovesLeft(board))
+        {   
+            send(sock, tie, strlen(tie), 0);
+        }
 
         //Receive a reply from the server
         if(recv(sock , serverReply , maxChar , 0) < 0)
