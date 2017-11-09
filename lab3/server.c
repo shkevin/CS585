@@ -92,6 +92,7 @@ int main(int argc , char *argv[])
         {
         	board = setBoard(board);
         	memset(message, 20, 0);
+        	memset(reply, 20, 0);
         	message[13] = '\n';
         	continue;
         }
