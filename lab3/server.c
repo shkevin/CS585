@@ -87,8 +87,7 @@ int main(int argc , char *argv[])
     while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
     {    	
         //Send the message back to client
-        puts(reply);
-        if (reply == "tie"  || !isMovesLeft(board))
+        if (reply[0] == 't')
         {
         	puts(message);
         	puts(reply);
