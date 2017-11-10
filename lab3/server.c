@@ -101,6 +101,7 @@ int main(int argc , char *argv[])
 		board = swapBoard(reply, board);
 		if (!isMovesLeft(board))
 		{
+			puts(reply);
 			continue;
 		}
         move = findBestMove(board, player);
