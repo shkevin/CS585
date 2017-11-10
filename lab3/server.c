@@ -99,7 +99,7 @@ int main(int argc , char *argv[])
         }
 
 		board = swapBoard(reply, board);
-		memset(reply, 0, strlen(reply));
+		// memset(reply, 0, strlen(reply));
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
