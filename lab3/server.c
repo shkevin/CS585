@@ -41,7 +41,6 @@ int main(int argc , char *argv[])
     player = 'O';
     opponent = 'X';
     message[13] = '\n';
-    char tie[4] = {'t','i','e','\n'};
 
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
@@ -89,7 +88,7 @@ int main(int argc , char *argv[])
     {    	
         //Send the message back to client
         puts(reply);
-        if (reply[0] == 't')
+        if (reply == "tie"  || !isMovesLeft(board))
         {
         	puts(message);
         	puts(reply);
@@ -99,13 +98,8 @@ int main(int argc , char *argv[])
         	message[13] = '\n';
         	continue;
         }
-        
+
 		board = swapBoard(reply, board);
-		if (!isMovesLeft(board))
-        {
-        	write(client_sock, tie, 4);
-        	continue;
-        }
 		memset(reply, 20, 0);
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
