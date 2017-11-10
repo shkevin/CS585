@@ -88,19 +88,23 @@ int main(int argc , char *argv[])
     {    	
         //Send the message back to client
         puts(reply);
-        if (reply == "tie"  || !isMovesLeft(board))
+        if (reply == "tie")
         {
         	puts(message);
         	puts(reply);
         	board = setBoard(board);
-        	memset(message, 20, 0);
-        	memset(reply, 20, 0);
+        	memset(message, 0, strlen(message)*sizeof(char));
+        	memset(reply, 0, strlen(reply)*sizeof(char));
         	message[13] = '\n';
+        	continue;
+        }
+        if (!isMovesLeft(board))
+        {
         	continue;
         }
 
 		board = swapBoard(reply, board);
-		memset(reply, 20, 0);
+		memset(reply, 0, strlen(reply)*sizeof(char));
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
