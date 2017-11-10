@@ -84,7 +84,7 @@ int main(int argc , char *argv[])
     puts("Connection accepted");
 
     //Receive a message from client
-    while( (read_size = recv(client_sock , reply , strlen(reply) , 0)) > 0 )
+    while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
     {    	
         //Send the message back to client
         if (reply == "tie")
@@ -92,11 +92,14 @@ int main(int argc , char *argv[])
         	puts(message);
         	puts(reply);
         	board = setBoard(board);
+        	memset(message, 0, 20);
+        	memset(reply, 0, 20);
         	message[13] = '\n';
         	continue;
         }
 
 		board = swapBoard(reply, board);
+		memset(reply, 0, 20);
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
