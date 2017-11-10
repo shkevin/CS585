@@ -92,14 +92,14 @@ int main(int argc , char *argv[])
         	puts(message);
         	puts(reply);
         	board = setBoard(board);
-        	memset(message, 0, 20);
-        	memset(reply, 0, 20);
+        	memset(message, 20, 0);
+        	memset(reply, 20, 0);
         	message[13] = '\n';
         	continue;
         }
 
 		board = swapBoard(reply, board);
-		memset(reply, 0, 20);
+		memset(reply, 20, 0);
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
