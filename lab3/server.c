@@ -101,6 +101,7 @@ int main(int argc , char *argv[])
 		board = swapBoard(reply, board);
 		if (!isMovesLeft(board))
 		{
+			board = setBoard(board);
 			puts(reply);
 			continue;
 		}
