@@ -103,7 +103,7 @@ int main(int argc , char *argv[])
 		board = swapBoard(reply, board);
 		if (!isMovesLeft(board))
         {
-        	write(client_sock, "\n", 1);
+        	write(client_sock, tie, 4);
         	continue;
         }
 		memset(reply, 20, 0);
