@@ -49,6 +49,7 @@ int main(int argc , char *argv[])
     char tie[4] = {'t','i','e','\n'};
     message[13] = '\n';
     char quit[5] = {'q','u','i','t','\n'};
+    bool flag = false;
 
     player = 'X';
     opponent = 'O';
@@ -77,12 +78,18 @@ int main(int argc , char *argv[])
     //keep communicating with server
     while(1)
     {
-        if (!isMovesLeft(board))
+        if (!isMovesLeft(board) && flag == false)
         {
             send(sock, message, strlen(message), 0);
+            flag = true;
+            continue;
+        }
+        if (flag)
+        {
             send(sock, tie, 4, 0);
             board = setBoard(board);
             first = true;
+            flag = false;
             puts(message);
             continue;
         }
