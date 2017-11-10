@@ -90,7 +90,6 @@ int main(int argc , char *argv[])
         //Send the message back to client
         if (reply[0] == 't')
         {
-        	puts(message);
         	write(client_sock, tie, 4);
         	board = setBoard(board);
         	memset(message, 20, 0);
