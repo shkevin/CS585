@@ -84,7 +84,7 @@ int main(int argc , char *argv[])
     puts("Connection accepted");
 
     //Receive a message from client
-    while( (read_size = recv(client_sock , reply , maxChar , 0)) > 0 )
+    while( (read_size = recv(client_sock , reply , strlen(reply) , 0)) > 0 )
     {    	
         //Send the message back to client
         if (reply == "tie")
