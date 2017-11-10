@@ -41,6 +41,7 @@ int main(int argc , char *argv[])
     player = 'O';
     opponent = 'X';
     message[13] = '\n';
+    char tie[4] = {'t','i','e','\n'};
 
     //Create socket
     socket_desc = socket(AF_INET , SOCK_STREAM , 0);
@@ -90,7 +91,7 @@ int main(int argc , char *argv[])
         if (reply[0] == 't')
         {
         	puts(message);
-        	puts(reply);
+        	write(client_sock, tie, 4);
         	board = setBoard(board);
         	memset(message, 20, 0);
         	memset(reply, 20, 0);
