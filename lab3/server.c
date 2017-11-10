@@ -93,8 +93,8 @@ int main(int argc , char *argv[])
         	puts(message);
         	puts(reply);
         	board = setBoard(board);
-        	// memset(message, 0, strlen(message)*sizeof(char));
-        	// memset(reply, 0, strlen(reply)*sizeof(char));
+        	memset(message, 20, 0);
+        	memset(reply, 20, 0);
         	message[13] = '\n';
         	continue;
         }
@@ -104,7 +104,7 @@ int main(int argc , char *argv[])
         }
 
 		board = swapBoard(reply, board);
-		// memset(reply, 0, strlen(reply)*sizeof(char));
+		memset(reply, 20, 0);
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
