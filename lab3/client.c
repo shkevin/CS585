@@ -80,6 +80,7 @@ int main(int argc , char *argv[])
     {
         if (!isMovesLeft(board) && flag == false)
         {
+            message[13] = '\n';
             send(sock, message, strlen(message), 0);
             flag = true;
             continue;
