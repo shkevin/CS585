@@ -99,6 +99,10 @@ int main(int argc , char *argv[])
         }
 
 		board = swapBoard(reply, board);
+		if (!isMovesLeft(board))
+		{
+			continue;
+		}
         move = findBestMove(board, player);
 	    board[move.row][move.col] = player;
         message = sendBoard(board);
